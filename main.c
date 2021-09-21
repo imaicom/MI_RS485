@@ -267,6 +267,7 @@ void Send_RS485(byte CMND, byte ID, byte n) {
     }
     put_UART(chksum & 0xFF);
     uart_wr_ptr = 0;
+    
     for (i = 0; i < 10; i++) {
         for (j = 0; j < 10; j++);
     }
