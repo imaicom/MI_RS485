@@ -44,8 +44,6 @@ byte Rcv_RS485(void);
 unsigned char UART_rd_buffer[uart_ptr_max]; // UART receive buffer (MASTER --> SLAVE)
 unsigned char UART_wr_buffer[uart_ptr_max]; // UART send buffer (SLAVE --> MASTER)
 unsigned char uart_wr_ptr, uart_rd_ptr, uart_buf_bytes, n_uart_wrbuf, uart_rcv_complete;
-unsigned char ctstart, REGC7, COM_stage, SW[3];
-static unsigned char message_state = 0;
 unsigned char a;
 unsigned char uart_rd_ptr, LEN;
 int TMR0L, TMR0H, TMR0L1, TMR0H1, cnt01, cnt0;
@@ -72,9 +70,9 @@ unsigned char CMND, SID, ID, msg[8], FF_mode;
 
 void __interrupt() isr(void) {
 
-    if (RCIF) { //USART割り込み？
-        a = RCSTA; // Receive Status
-        a = RCREG; // Receive Register
+    if (RCIF) {     // USART Interrupt?
+        a = RCSTA;  // Receive Status
+        a = RCREG;  // Receive Register
         UART_rd_buffer[uart_rd_ptr] = a;
         uart_rd_ptr++;
         uart_buf_bytes++;
@@ -96,7 +94,6 @@ void __interrupt() isr(void) {
             }
 
         } else if (FF_mode == 2) {
-
             if (uart_rcv_complete == 0) {
                 if (uart_buf_bytes == 5) LEN = a;
                 if (uart_buf_bytes >= LEN + 5) {
@@ -108,15 +105,15 @@ void __interrupt() isr(void) {
             }
         }
 
-        if (OERR) {
-            CREN = 0;
-            CREN = 1;
+        if (OERR) {     // Over Run Error
+            CREN = 0;   // Disable Receiver
+            CREN = 1;   // Enable  Receiver           
         }
     }
     CREN = 1;
     RCIE = 1;
     PEIE = 1;
-    INTCONbits.GIE = 1; // レベル許可
+    INTCONbits.GIE = 1; // Level Permission
 
 }
 
@@ -130,15 +127,15 @@ void COMM_RS485(void) {
     // RS485 command interpreter
     //
     //  Packet format ( RS485 network MASTER <-> SLAVE )
-    //            aa[0]    aa[1]   aa[2]    aa[3]   aa[4]            aa[2+LEN]
+    //            aa[0]    aa[1]   aa[2]    aa[3]   aa[4]     aa[2+LEN]
     //   | ID  |  LEN   |  CMND   |  PRM0  | PRM1 | ------- | PRMx   | 
-    //             0x00 : RESET
-    //      0x01 : PING
-    //             0x02 : READ
-    //             0x03 : WRITE
+    //                     0x00 : RESET
+    //                     0x01 : PING
+    //                     0x02 : READ
+    //                     0x03 : WRITE
     //  RS485 Command state machine
-    //     Send Command PC>MASTER>SLAVE : COM_stage=0
-    //     Receive Reply SLAVE>MASTER>PC : COM_stage=1
+    //     Send Command  PC>MASTER>SLAVE :
+    //     Receive Reply SLAVE>MASTER>PC :
     //
 
     // RS485 Ack packet proccessor
@@ -205,7 +202,7 @@ void COMM_RS485(void) {
                     break;
             } // switch   
         } // if ((ID == 0xFE) || (ID == myID))
-    } // End of COM_stage switch
+    } //     if (uart_rcv_complete)
     
     for (i = 0; i < 10; i++) {
         for (j = 0; j < 10; j++);
