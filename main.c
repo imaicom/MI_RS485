@@ -21,7 +21,6 @@ Pin assignment(PIC12F1822,8P)
 typedef unsigned char byte; // 8-bit
 
 void InitializeUSART(void);
-void InitializeI2C(void);
 
 // PROTYPE DECLARATION
 void COMM_RS485(void);
