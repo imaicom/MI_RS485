@@ -46,7 +46,7 @@ unsigned char UART_wr_buffer[uart_ptr_max]; // UART send buffer (SLAVE --> MASTE
 unsigned char uart_wr_ptr, uart_rd_ptr, uart_buf_bytes, n_uart_wrbuf, uart_rcv_complete;
 unsigned char ctstart, REGC7, COM_stage, SW[3];
 static unsigned char message_state = 0;
-unsigned char a, cnt, tick_count, I2C_state, I2C_DA, I2C_RA, I2C_MDATA, I2C_SDATA, RCVFLG, cnt1;
+unsigned char a;
 unsigned char uart_rd_ptr, LEN;
 int TMR0L, TMR0H, TMR0L1, TMR0H1, cnt01, cnt0;
 unsigned char CMND, SID, ID, msg[8], FF_mode;
@@ -156,7 +156,7 @@ void COMM_RS485(void) {
         if ((ID == 0xFE) || (ID == myID)) {
             switch (CMND) {
 
-                case Reset_RS485:
+                case Reset_RS485:       // 0
                     if (ID == myID) {
                         if (Resp == 0) {
                             RSP = 0x41; // ACK
@@ -167,7 +167,7 @@ void COMM_RS485(void) {
                     }
                     break;
 
-                case Ping:
+                case Ping:              // 1
                     if (ID == myID) {
                         if (Resp == 0) {
                             RSP = 0x41; // ACK
@@ -178,7 +178,7 @@ void COMM_RS485(void) {
                     }
                     break;
 
-                case Read:
+                case Read:                 // 2
                     if (ID == myID) {
                         if (Resp == 0) {
                             ADCON0 = 0x0B; // ADC=AN2, GODONE, ADC ON
@@ -193,7 +193,7 @@ void COMM_RS485(void) {
                     }
                     break;
 
-                case Write:
+                case Write:             // 3
                     if (ID == myID) {
                         if (Resp == 0) {
                             RSP = 0x41; // ACK
@@ -204,8 +204,7 @@ void COMM_RS485(void) {
                     }
                     break;
             } // switch   
-        }
-
+        } // if ((ID == 0xFE) || (ID == myID))
     } // End of COM_stage switch
     
     for (i = 0; i < 10; i++) {
