@@ -349,7 +349,7 @@ void main() {
     int i, j, k;
 
     OPTION_REG = 0x80; // prescaler 1:2 512us@4MHz
-    OSCCON = 0xFF; // 16MHz
+    OSCCON = 0x7A; // 16MHz
     APFCON = 0x00; // TXD(RA0),RXD(RA1)
     ANSELA = 0x04; // AN2(RA2)
     CCP1CON = 0x00; // Capture/Compare/PWM disabled
@@ -358,9 +358,10 @@ void main() {
 
     TMR0 = 0;
     INTCON = 0x00; // GIE:1,T0IE:1
-    ANSELA = 0x04;
-    ADCON0 = 0x09; // ADFM:Left
-    ADGO = 0;
+    ANSELA = 0x04; // RA2=Analog Input
+    ADCON0 = 0x09; // AN3 / GO / ADC_ON
+    ADCON1 = 0x00; // ADFM:Left / FOSC/2 VREF=VDD
+    ADGO = 0;      // AD Conversion Gone
 
     InitializeUSART();
 
