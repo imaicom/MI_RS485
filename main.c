@@ -146,7 +146,7 @@ void COMM_RS485(void) {
     //             0x03 : WRITE
     //  RS485 Command state machine
     //     Send Command PC>MASTER>SLAVE : COM_stage=0
-    //         Receive Reply SLAVE>MASTER>PC : COM_stage=1
+    //     Receive Reply SLAVE>MASTER>PC : COM_stage=1
     //
 
     // RS485 Ack packet proccessor
@@ -249,7 +249,7 @@ void InitializeUSART(void) {
     RCSTA = 0x90; // SP enable,Single Character RX
     // SPBRG = 0x67;
     // SPBRGH = 0x00; // 0x067 for 16MHz -> 19200 baud
-    SPBRG = 0xA0;
+    SPBRGL = 0xA0;
     SPBRGH = 0x01; // 0x1A0 for 16MHz -> 9600 baud
     BAUDCON = 0x08; // BRG16 = 1
     //        c = RCREG;    // read 
