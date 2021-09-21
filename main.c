@@ -221,11 +221,11 @@ void COMM_RS485(void) {
     }
 
     // UART TX serialization
-    if (TXSTAbits.TRMT == 1) {
+    if (TXSTAbits.TRMT == 1) { // TSR Empty
         if (n_uart_wrbuf == 0) {
-            RA5 = 0;
+            RA5 = 0; // RX Mode
         } else {
-            RA5 = 1;
+            RA5 = 1; // TX Mode
         }
         if (n_uart_wrbuf != 0) {
             TXREG = UART_wr_buffer[uart_wr_ptr];
@@ -237,7 +237,7 @@ void COMM_RS485(void) {
     }
 
     // end_of_USB_process:
-    i = 0;
+    i = 0; // ?????
 
 } //end of COMM_RS485
 
@@ -371,7 +371,7 @@ void main() {
     PEIE = 1;
     GIE = 1;
     RA5 = 1; // Change LTC485 to TX mode
-    RA5 = 0; // Change LTC485 to TX mode
+    RA5 = 0; // Change LTC485 to RX mode
     RA4 = 0;
     LEN = 3;
     FF_mode = 0;
