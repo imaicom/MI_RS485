@@ -25,8 +25,6 @@ void InitializeI2C(void);
 
 // PROTYPE DECLARATION
 void COMM_RS485(void);
-void WR_EEPROM(byte address, byte data);
-byte RD_EEPROM(byte address);
 void put_UART(byte data);
 void Send_RS485(byte CMND, byte ID, byte LEN);
 byte get_UART(void);
