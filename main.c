@@ -31,8 +31,6 @@ void put_UART(byte data);
 void Send_RS485(byte CMND, byte ID, byte LEN);
 byte get_UART(void);
 byte Rcv_RS485(void);
-void waitmsec(byte wait);
-void waitusec(byte wait);
 
 // Definition
 #define uart_ptr_max 10
