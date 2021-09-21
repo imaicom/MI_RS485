@@ -78,8 +78,6 @@ unsigned char CMND, SID, ID, msg[8], FF_mode;
 #define _XTAL_FREQ 1000000
 
 
-// (3) 割り込み処理プログラム
-
 void __interrupt() isr(void) {
 
     if (RCIF) { //USART割り込み？
