@@ -71,7 +71,6 @@ unsigned char CMND, SID, ID, msg[8], FF_mode;
 void __interrupt() isr(void) {
 
     if (RCIF) {     // USART Interrupt?
-        a = RCSTA;  // Receive Status
         a = RCREG;  // Receive Register
         UART_rd_buffer[uart_rd_ptr] = a;
         uart_rd_ptr++;
@@ -109,6 +108,7 @@ void __interrupt() isr(void) {
             CREN = 0;   // Disable Receiver
             CREN = 1;   // Enable  Receiver           
         }
+        RCIF = 0;
     }
     CREN = 1;
     RCIE = 1;
@@ -223,9 +223,6 @@ void COMM_RS485(void) {
             if (n_uart_wrbuf == 0) uart_wr_ptr = 0;
         }
     }
-
-    // end_of_USB_process:
-    i = 0; // ?????
 
 } //end of COMM_RS485
 
