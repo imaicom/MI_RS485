@@ -1,0 +1,203 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PIC14E ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 12F1822 ]
+[d frameptr 6 ]
+"10 /Applications/microchip/xc8/v2.32/pic/sources/c99/common/sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 /Applications/microchip/xc8/v2.32/pic/sources/c99/common/Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 /Applications/microchip/xc8/v2.32/pic/sources/c99/pic/__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"85 /Users/user/MPLABXProjects/MI_RS485.X/main.c
+[v _isr isr `II(v  1 e 1 0 ]
+"135
+[v _COMM_RS485 COMM_RS485 `(v  1 e 1 0 ]
+"247
+[v _InitializeUSART InitializeUSART `(v  1 e 1 0 ]
+"261
+[v _put_UART put_UART `(v  1 e 1 0 ]
+"267
+[v _Send_RS485 Send_RS485 `(v  1 e 1 0 ]
+"293
+[v _get_UART get_UART `(uc  1 e 1 0 ]
+"306
+[v _Rcv_RS485 Rcv_RS485 `(uc  1 e 1 0 ]
+"351
+[v _main main `(v  1 e 1 0 ]
+"351 /Applications/microchip/mplabx/v5.50/packs/Microchip/PIC12-16F1xxx_DFP/1.2.63/xc8/pic/include/proc/pic12f1822.h
+[v _INTCON INTCON `VEuc  1 e 1 @11 ]
+[s S30 . 1 `uc 1 IOCIF 1 0 :1:0 
+`uc 1 INTF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 IOCIE 1 0 :1:3 
+`uc 1 INTE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+"374
+[s S39 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 T0IE 1 0 :1:5 
+]
+[u S44 . 1 `S30 1 . 1 0 `S39 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES44  1 e 1 @11 ]
+"429
+[v _PORTA PORTA `VEuc  1 e 1 @12 ]
+"821
+[v _TMR0 TMR0 `VEuc  1 e 1 @21 ]
+"1242
+[v _TRISA TRISA `VEuc  1 e 1 @140 ]
+"1394
+[v _OPTION_REG OPTION_REG `VEuc  1 e 1 @149 ]
+"1645
+[v _OSCCON OSCCON `VEuc  1 e 1 @153 ]
+"1786
+[v _ADRESL ADRESL `VEuc  1 e 1 @155 ]
+"1806
+[v _ADRESH ADRESH `VEuc  1 e 1 @156 ]
+"1826
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @157 ]
+"2490
+[v _APFCON APFCON `VEuc  1 e 1 @285 ]
+"2632
+[v _ANSELA ANSELA `VEuc  1 e 1 @396 ]
+"2873
+[v _RCREG RCREG `VEuc  1 e 1 @409 ]
+"2893
+[v _TXREG TXREG `VEuc  1 e 1 @410 ]
+"2925
+[v _SPBRG SPBRG `VEuc  1 e 1 @411 ]
+"2979
+[v _SPBRGH SPBRGH `VEuc  1 e 1 @412 ]
+"3012
+[v _RCSTA RCSTA `VEuc  1 e 1 @413 ]
+"3074
+[v _TXSTA TXSTA `VEuc  1 e 1 @414 ]
+[s S76 . 1 `uc 1 TX9D 1 0 :1:0 
+`uc 1 TRMT 1 0 :1:1 
+`uc 1 BRGH 1 0 :1:2 
+`uc 1 SENDB 1 0 :1:3 
+`uc 1 SYNC 1 0 :1:4 
+`uc 1 TXEN 1 0 :1:5 
+`uc 1 TX9 1 0 :1:6 
+`uc 1 CSRC 1 0 :1:7 
+]
+"3091
+[u S85 . 1 `S76 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES85  1 e 1 @414 ]
+"3136
+[v _BAUDCON BAUDCON `VEuc  1 e 1 @415 ]
+"3977
+[v _CCP1CON CCP1CON `VEuc  1 e 1 @659 ]
+"5096
+[v _ADGO ADGO `VEb  1 e 0 @1257 ]
+"5357
+[v _CREN CREN `VEb  1 e 0 @3308 ]
+"5444
+[v _GIE GIE `VEb  1 e 0 @95 ]
+"5651
+[v _OERR OERR `VEb  1 e 0 @3305 ]
+"5705
+[v _PEIE PEIE `VEb  1 e 0 @94 ]
+"5750
+[v _RA4 RA4 `VEb  1 e 0 @100 ]
+"5753
+[v _RA5 RA5 `VEb  1 e 0 @101 ]
+"5762
+[v _RCIE RCIE `VEb  1 e 0 @1165 ]
+"5765
+[v _RCIF RCIF `VEb  1 e 0 @141 ]
+"49 /Users/user/MPLABXProjects/MI_RS485.X/main.c
+[v _UART_rd_buffer UART_rd_buffer `[10]uc  1 e 10 0 ]
+"50
+[v _UART_wr_buffer UART_wr_buffer `[10]uc  1 e 10 0 ]
+"51
+[v _uart_wr_ptr uart_wr_ptr `uc  1 e 1 0 ]
+[v _uart_buf_bytes uart_buf_bytes `uc  1 e 1 0 ]
+[v _n_uart_wrbuf n_uart_wrbuf `uc  1 e 1 0 ]
+[v _uart_rcv_complete uart_rcv_complete `uc  1 e 1 0 ]
+"54
+[v _a a `uc  1 e 1 0 ]
+"55
+[v _uart_rd_ptr uart_rd_ptr `uc  1 e 1 0 ]
+[v _LEN LEN `uc  1 e 1 0 ]
+"57
+[v _CMND CMND `uc  1 e 1 0 ]
+[v _ID ID `uc  1 e 1 0 ]
+[v _msg msg `[8]uc  1 e 8 0 ]
+[v _FF_mode FF_mode `uc  1 e 1 0 ]
+"351
+[v _main main `(v  1 e 1 0 ]
+{
+"353
+[v main@j j `i  1 a 2 2 ]
+[v main@i i `i  1 a 2 0 ]
+"387
+} 0
+"247
+[v _InitializeUSART InitializeUSART `(v  1 e 1 0 ]
+{
+"259
+} 0
+"135
+[v _COMM_RS485 COMM_RS485 `(v  1 e 1 0 ]
+{
+"138
+[v COMM_RS485@RSP RSP `uc  1 a 1 8 ]
+"137
+[v COMM_RS485@i i `uc  1 a 1 7 ]
+[v COMM_RS485@j j `uc  1 a 1 6 ]
+"138
+[v COMM_RS485@Resp Resp `uc  1 a 1 5 ]
+"245
+} 0
+"267
+[v _Send_RS485 Send_RS485 `(v  1 e 1 0 ]
+{
+[v Send_RS485@CMND CMND `uc  1 a 1 wreg ]
+"268
+[v Send_RS485@i i `uc  1 a 1 4 ]
+[v Send_RS485@j j `uc  1 a 1 3 ]
+[v Send_RS485@chksum chksum `uc  1 a 1 2 ]
+[v Send_RS485@data data `uc  1 a 1 1 ]
+"267
+[v Send_RS485@CMND CMND `uc  1 a 1 wreg ]
+[v Send_RS485@ID ID `uc  1 p 1 4 ]
+[v Send_RS485@n n `uc  1 p 1 5 ]
+"269
+[v Send_RS485@CMND CMND `uc  1 a 1 0 ]
+"291
+} 0
+"261
+[v _put_UART put_UART `(v  1 e 1 0 ]
+{
+[v put_UART@data data `uc  1 a 1 wreg ]
+[v put_UART@data data `uc  1 a 1 wreg ]
+[v put_UART@data data `uc  1 a 1 3 ]
+"265
+} 0
+"306
+[v _Rcv_RS485 Rcv_RS485 `(uc  1 e 1 0 ]
+{
+"307
+[v Rcv_RS485@data data `uc  1 a 1 7 ]
+[v Rcv_RS485@i i `uc  1 a 1 6 ]
+"349
+} 0
+"293
+[v _get_UART get_UART `(uc  1 e 1 0 ]
+{
+"294
+[v get_UART@data data `uc  1 a 1 3 ]
+"304
+} 0
+"85
+[v _isr isr `II(v  1 e 1 0 ]
+{
+"133
+} 0
