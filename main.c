@@ -70,11 +70,6 @@ unsigned char CMND, SID, ID, msg[8], FF_mode;
 #pragma config BORV = LO        // Brown-out Reset Voltage Selection (Brown-out Reset Voltage (Vbor), low trip point selected.)
 #pragma config LVP = OFF        // Low-Voltage Programming Enable (High-voltage on MCLR/VPP must be used for programming)
 
-// クロック周波数指定
-// __delay_ms()関数が使用する
-#define _XTAL_FREQ 1000000
-
-
 void __interrupt() isr(void) {
 
     if (RCIF) { //USART割り込み？
