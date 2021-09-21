@@ -10,7 +10,7 @@ Pin assignment(PIC12F1822,8P)
  5:RA2:A: Sensor INPUT (ADC)
  4:RA3:O:
  3:RA4:O:
- 2:RA5:O: TX-RX selection
+ 2:RA5:O: TX-RX serialization
  8:VSS:P:
  1:VDD:P:
 ---------------------------------------------------------------
@@ -81,8 +81,8 @@ unsigned char CMND, SID, ID, msg[8], FF_mode;
 void __interrupt() isr(void) {
 
     if (RCIF) { //USART割り込み？
-        a = RCSTA;
-        a = RCREG;
+        a = RCSTA; // Receive Status
+        a = RCREG; // Receive Register
         UART_rd_buffer[uart_rd_ptr] = a;
         uart_rd_ptr++;
         uart_buf_bytes++;
@@ -215,6 +215,7 @@ void COMM_RS485(void) {
         }
 
     } // End of COM_stage switch
+    
     for (i = 0; i < 10; i++) {
         for (j = 0; j < 10; j++);
     }
@@ -246,8 +247,8 @@ void InitializeUSART(void) {
     //      UART_TRISTx=0;    // TX
     TXSTA = 0x24; // TX enable BRGH=1
     RCSTA = 0x90; // SP enable,Single Character RX
-    SPBRG = 0x67;
-    SPBRGH = 0x00; // 0x067 for 16MHz -> 19200 baud
+    // SPBRG = 0x67;
+    // SPBRGH = 0x00; // 0x067 for 16MHz -> 19200 baud
     SPBRG = 0xA0;
     SPBRGH = 0x01; // 0x1A0 for 16MHz -> 9600 baud
     BAUDCON = 0x08; // BRG16 = 1
