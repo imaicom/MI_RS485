@@ -348,7 +348,7 @@ void main() {
     unsigned short LED;
     int i, j, k;
 
-    OPTION_REG = 0x80; // prescaler 1:2 512us@4MHz
+    OPTION_REG = 0x80; // prescaler 1:2
     OSCCON = 0x7A; // 16MHz
     APFCON = 0x00; // TXD(RA0),RXD(RA1)
     ANSELA = 0x04; // AN2(RA2)
