@@ -110,9 +110,9 @@ void __interrupt() isr(void) {
         }
         RCIF = 0;
     }
-    CREN = 1;
-    RCIE = 1;
-    PEIE = 1;
+    CREN = 1; // Enable  Receiver 
+    RCIE = 1; // enable USART Interrupt
+    PEIE = 1; // enable Peripheral function Interrupt
     INTCONbits.GIE = 1; // Level Permission
 
 }
@@ -344,7 +344,7 @@ void main() {
     PORTA = 0x00;
 
     TMR0 = 0;
-    INTCON = 0x00; // GIE:1,T0IE:1
+    INTCON = 0x00; // GIE:0,T0IE:0
     ANSELA = 0x04; // RA2=Analog Input
     ADCON0 = 0x09; // AN2 , GO , ADC_ON
     ADCON1 = 0x00; // ADFM:Left , FOSC/2 , VREF=VDD
@@ -353,9 +353,9 @@ void main() {
     InitializeUSART();
 
     uart_rcv_complete = 0;
-    RCIE = 1;
-    PEIE = 1;
-    GIE = 1;
+    RCIE = 1; // enable USART Interrupt
+    PEIE = 1; // enable Peripheral function Interrupt
+    GIE = 1; // enable Global Interrupt 
     RA5 = 1; // Change LTC485 to TX mode
     RA5 = 0; // Change LTC485 to RX mode
     RA4 = 0;
