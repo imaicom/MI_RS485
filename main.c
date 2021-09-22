@@ -228,10 +228,9 @@ void COMM_RS485(void) {
 
 void InitializeUSART(void) {
     char c;
-    //      UART_TRISRx=1;    // RX
-    //      UART_TRISTx=0;    // TX
+
     TXSTA = 0x24; // TX enable,BRGH=1
-    RCSTA = 0x90; // SP enable,Single Character RX
+    RCSTA = 0x90; // Serial Port enable , Continuous reception enabled
     // SPBRG = 0x67;
     // SPBRGH = 0x00; // 0x067 for 16MHz -> 19200 baud
     SPBRGL = 0xA0;
