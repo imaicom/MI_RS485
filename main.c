@@ -287,6 +287,7 @@ byte get_UART(void) {
 
 byte Rcv_RS485(void) {
     byte i, ret, data;
+    
     ret = 0;
     uart_rd_ptr = 0;
     data = get_UART();
@@ -307,7 +308,8 @@ byte Rcv_RS485(void) {
 
     data = get_UART();
 
-    if ((0 <= data)&&(data < 5)) {
+//  if ((0 <= data)&&(data < 5))
+    if ((data == 0)||(data == 1)||(data == 2)||(data == 3)||(data == 4)) {
         CMND = data;
     } else {
         uart_rd_ptr = 0;
