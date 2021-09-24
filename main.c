@@ -97,7 +97,7 @@ void __interrupt() isr(void) {
                 if (uart_buf_bytes == 5) LEN = a;
                 if (uart_buf_bytes >= LEN + 5) {
                     uart_rcv_complete = 1;
-                    RA4 = 1;
+                    // RA4 = 1;
                     uart_rd_ptr = 0;
                     FF_mode = 0;
                 }
@@ -144,7 +144,7 @@ void COMM_RS485(void) {
 
     if (uart_rcv_complete) {
         Resp = Rcv_RS485();
-        RA4 = 0;
+    //    RA4 = 0;
         for (i = 0; i < 10; i++) {
             for (j = 0; j < 10; j++);
         }
@@ -250,7 +250,7 @@ void Send_RS485(byte CMND, byte ID, byte n) {
     chksum = 0;
 
     RA5 = 1; // Change LTC485 to TX mode
-    RA4 = 1;
+    // RA4 = 1;
     put_UART(0xFF);
     put_UART(0xFF);
     put_UART(CMND);
@@ -363,10 +363,31 @@ void main() {
     LEN = 3;
     FF_mode = 0;
 
+    Send_RS485(01,01,00);
+    //put_UART('A');
+    //put_UART('B');
+    //put_UART('C');
+
+    
     while (1) {
         COMM_RS485();
         for (i = 0; i < 10; i++) {
             for (j = 0; j < 10; j++);
-        }
+        };
+        if(RA3==1) {
+            //RA4=1;
+        }; 
+        if(RA3==0) {
+            RA4=0;
+            //put_UART(0x01);
+            while(RA3==0) {
+                for (i = 0; i < 10; i++) {
+                    for (j = 0; j < 10; j++);
+                };
+            };
+            RA4=1;
+
+        };
+        
     }
 } // end of main
