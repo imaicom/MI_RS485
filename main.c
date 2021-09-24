@@ -68,8 +68,41 @@ unsigned char CMND, SID, ID, msg[8], FF_mode;
 #pragma config BORV = LO        // Brown-out Reset Voltage Selection (Brown-out Reset Voltage (Vbor), low trip point selected.)
 #pragma config LVP = OFF        // Low-Voltage Programming Enable (High-voltage on MCLR/VPP must be used for programming)
 
+char data;
+
+void serialInit(char rateScaler) {
+    //baud rate init
+    SPBRG = rateScaler;
+    TXSTA = 0b00100100;
+    RCSTA = 0b10010000; 
+}
+void serialSendChar(char value) {
+    if (TRMT == 1) { // TSR Empty
+        RA5 = 0; // RX Mode
+    } else {
+        RA5 = 1; // TX Mode
+    };
+    while((TXSTA & 1 << TRMT) == 0);
+        // TRMT is better then TXIF
+    TXREG = value; //txreg = USART Transmit Register 
+}
+
+
+    
+char serialReceiveChar() {
+    while((PIR1 & 1 << RCIF) == 0);
+    return RCREG; //rcreg = USART Receive Register 
+}
+
+void serialSendString(const char* text) {
+    char i = 0;
+    while(text[i] != 0) serialSendChar(text[i++]);
+}
+
+
 void __interrupt() isr(void) {
 
+    /*
     if (RCIF) {     // USART Interrupt?
         a = RCREG;  // Receive Register
         UART_rd_buffer[uart_rd_ptr] = a;
@@ -110,6 +143,16 @@ void __interrupt() isr(void) {
         }
         RCIF = 0;
     }
+    */
+    
+    //Handle RS232 Recieve interrupt
+    if( PIR1 & (1<< RCIF) ) {
+        //clear_bit( PIR1, RCIF ); //clear RS232 Recieve interrupt bit
+        RCIF = 0;
+        //ここでデータを受信
+        data = serialReceiveChar();
+    }
+    
     CREN = 1; // Enable  Receiver 
     RCIE = 1; // enable USART Interrupt
     PEIE = 1; // enable Peripheral function Interrupt
@@ -363,6 +406,10 @@ void main() {
     LEN = 3;
     FF_mode = 0;
 
+    serialSendString("Start Serial Test¥r¥n");
+    
+    while(1);
+    
     Send_RS485(01,01,00);
     //put_UART('A');
     //put_UART('B');
